@@ -17,12 +17,9 @@ class Movie extends Model
         'trailer'
       ];
 
-    public function reviews(){
-         return $this->hasMany('App\Reviews');
-    }
-    public function photos(){
-         return $this->hasMany('App\Stars');
-    }
+     public function director() {
+          return $this->belongsTo('App\Director');
+     }
     public function genres(){
          return $this->hasMany('App\Genre');
     }

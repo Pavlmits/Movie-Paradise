@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Director extends Model
 {
     protected $fillable =[
-        'id',
+        
         'name',
         'bio',
         'photo'
     ];
+
+    public function movies(){
+        return $this->hasMany('App\Movie');
+    }
 }

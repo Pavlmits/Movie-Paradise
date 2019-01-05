@@ -42,7 +42,7 @@ class DirectorsController extends Controller
         ]);
 
         $director = new Director;
-        $director->name = $request->input('title');
+        $director->name = $request->input('name');
         $director->bio = $request->input('bio');
         $director->save();
         
@@ -83,18 +83,16 @@ class DirectorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request -> validate([
-            'director_name' => 'required',
-            'director_bio'=>'required'
+        $this -> validate($request,[
+            'name' => 'required',
+            'bio'=>'required'
         ]);
 
         $director = Director::find($id);
-        $director->name = $request->get('director_name');
-        $director->bio = $request->get('director_bio');
-        $director->photo = $request->get('director_photo');
-        
-
+        $director->name = $request->input('name');
+        $director->bio = $request->input('bio');
         $director->save();
+        
         return redirect('/directors')->with('success', 'Director has been updated');
         
     }

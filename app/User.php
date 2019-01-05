@@ -4,10 +4,15 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends \TCG\Voyager\Models\User
+class User extends Model
 {
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role','user_role','user_id','role_id');
+    }
     use Notifiable;
 
     /**
