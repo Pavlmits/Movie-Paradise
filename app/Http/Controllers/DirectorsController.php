@@ -44,6 +44,8 @@ class DirectorsController extends Controller
         $director = new Director;
         $director->name = $request->input('name');
         $director->bio = $request->input('bio');
+        $director->photo = $request->input('photo');
+
         $director->save();
         
         return redirect('/directors')->with('success', 'Director has been added');

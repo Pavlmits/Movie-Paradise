@@ -7,12 +7,18 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     public function roles()
     {
         return $this->belongsToMany('App\Role','user_role','user_id','role_id');
     }
+    public function movies()
+    {
+        return $this->belongsToMany('App\Movie','user_movie','user_id','movie_id');
+    }
+   
+    
     use Notifiable;
 
     /**
@@ -32,4 +38,9 @@ class User extends Model
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function hasAnyRole($roles)
+    {
+        
+    }
 }

@@ -7,5 +7,5 @@
             {!!$director->bio!!}
       </div>
       <hr>
-      <a href="/directors/{{$director->id}}/edit" class="btn btn-default">Edit</a>
+      <a href="/directors/{{$director->id}}/edit" class="btn btn-primary">Edit</a>
 @endsection

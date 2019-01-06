@@ -15,6 +15,6 @@ class Star extends Model
     ];
 
     public function movie(){
-        return $this->belongsTo('App\Movie');
+        return $this->belongsTo('App\Movie','movie_star','star_id','movie_id');
     }
 }
