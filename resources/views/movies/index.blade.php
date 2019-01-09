@@ -15,6 +15,7 @@
   <table class="table table-striped">
     <thead>
         <tr>
+          <td>Photo</td>
           <td>ID</td>
           <td>Movie Title</td>
           <td>Duration</td>
@@ -25,10 +26,11 @@
     <tbody>
         @foreach($movies as $movie)
         <tr>
+            <td><img style="width:20%" src="/storage/photo/{{$movie->photo}}"></td>
             <td>{{$movie->id}}</td>
-            <td>{{$movie->movie_title}}</td>
-            <td>{{$movie->movie_duration}}</td>
-            <td>{{$movie->movie_year}}</td>
+            <td>{{$movie->title}}</td>
+            <td>{{$movie->duration}}</td>
+            <td>{{$movie->year}}</td>
             <td><a href="{{ route('movies.edit',$movie->id)}}" class="btn btn-primary">Edit</a></td>
             <td>
                 <form action="{{ route('movies.destroy', $movie->id)}}" method="post">
@@ -42,4 +44,5 @@
     </tbody>
   </table>
 <div>
+<a href="/movies/create" class="btn btn-primary">Insert</a>
 @endsection

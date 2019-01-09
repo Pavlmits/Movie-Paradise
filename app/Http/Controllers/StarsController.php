@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Star;
 
 class StarsController extends Controller
 {
@@ -13,7 +14,8 @@ class StarsController extends Controller
      */
     public function index()
     {
-        //
+        $stars = Star::orderBy('name','asc')->paginate(10);
+        return view('stars.index')->with('stars',$stars);
     }
 
     /**
@@ -23,7 +25,7 @@ class StarsController extends Controller
      */
     public function create()
     {
-        //
+        return view('stars.create');
     }
 
     /**
@@ -34,7 +36,35 @@ class StarsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this -> validate($request,[
+            'name' => 'required',
+            'bio'=>'required',
+            'photo'=>'image|nullable|max:1999'
+        ]);
+
+        if($request->hasFile('photo')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('photo')->storeAs('public/photo', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
+        $star = new Star;
+        $star->name = $request->input('name');
+        $star->bio = $request->input('bio');
+        $star->photo = $fileNameToStore;
+        
+        $star->save();
+        
+        return redirect('/stars')->with('success', 'Actor has been added');
     }
 
     /**
@@ -45,7 +75,8 @@ class StarsController extends Controller
      */
     public function show($id)
     {
-        //
+        $star = Star::find($id);
+        return view('stars.show')->with('star',$star);
     }
 
     /**
@@ -56,7 +87,9 @@ class StarsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $star = Star::find($id);
+
+        return view('stars.edit')->with('star',$star);
     }
 
     /**
@@ -68,7 +101,17 @@ class StarsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this -> validate($request,[
+            'name' => 'required',
+            'bio'=>'required'
+        ]);
+
+        $star = Star::find($id);
+        $star->name = $request->input('name');
+        $star->bio = $request->input('bio');
+        $star->save();
+        
+        return redirect('/stars')->with('success', 'Actor has been updated');
     }
 
     /**
@@ -79,6 +122,9 @@ class StarsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $star = Star::find($id);
+        $star->delete();
+
+        return redirect('/stars')->with('success','Star has been deleted successfully');
     }
 }

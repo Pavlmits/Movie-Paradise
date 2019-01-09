@@ -38,13 +38,29 @@ class DirectorsController extends Controller
     {
         $this -> validate($request,[
             'name' => 'required',
-            'bio'=>'required'
+            'bio'=>'required',
+            'photo'=>'image|nullable|max:1999'
         ]);
+
+        if($request->hasFile('photo')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('photo')->storeAs('public/photo', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
 
         $director = new Director;
         $director->name = $request->input('name');
         $director->bio = $request->input('bio');
-        $director->photo = $request->input('photo');
+        $director->photo = $fileNameToStore;
 
         $director->save();
         

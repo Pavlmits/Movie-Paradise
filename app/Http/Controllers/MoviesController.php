@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Movie;
+use App\Genre;
 use Illuminate\Http\Request;
 
 class MoviesController extends Controller
@@ -15,6 +16,7 @@ class MoviesController extends Controller
     public function index()
     {
         $movies = Movie::all();
+      
         return view('movies.index',compact('movies'));
     }
 
@@ -25,7 +27,8 @@ class MoviesController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        $genres = Genre::all();
+        return view('movies.create',compact('genres'));
     }
 
     /**
@@ -38,9 +41,26 @@ class MoviesController extends Controller
     {
         $request->validate([
             'movie_title'=>'required',
-            'year'=>'required|integer',
-            'duration'=>'required|integer'
+            'movie_year'=>'required|integer',
+            'movie_duration'=>'required|integer',
+            'photo'=>'image|nullable|max:1999'
         ]) ;
+
+        if($request->hasFile('photo')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('photo')->storeAs('public/photo', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
+
         $movie = new Movie ([
             'title' => $request->get('movie_title'),
             'year' => $request->get('movie_year'),
@@ -50,6 +70,7 @@ class MoviesController extends Controller
             'plot' => $request->get('movie_plot'),
             'trailer' => $request->get('movie_trailer')
         ]);
+        $movie->photo = $fileNameToStore;
             $movie->save();
 
             return redirect('/movies')->with('success', 'Movie has been added');
@@ -72,8 +93,9 @@ class MoviesController extends Controller
      */
     public function edit($id)
     {
+        $genres = Genre::all();
         $movie = Movie::find($id);
-        return view('movies.edit',compact('movie'));
+        return view('movies.edit',compact('movie','genres'));
     }
 
     /**
@@ -85,20 +107,31 @@ class MoviesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'movie_title'=>'required',
-            'year'=>'required|integer',
-            'duration'=>'required|integer'
-        ]) ;
+        
 
+        if($request->hasFile('photo')){
+            // Get filename with the extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            // Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore= $filename.'_'.time().'.'.$extension;
+            // Upload Image
+            $path = $request->file('photo')->storeAs('public/photo', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpg';
+        }
         $movie = Movie::find($id);
-        $movie->movie_title = $request->get('movie_title');
-        $movie->movie_year = $request->get('movie_year');
-        $movie->movie_duration = $request->get('movie_duration');
-        $movie->movie_genre = $request->get('movie_genre');
-        $movie->movie_language = $request->get('movie_language');
-        $movie->movie_plot = $request->get('movie_plot');
-        $movie->movie_trailer > $request->get('movie_trailer');
+        $movie->title = $request->get('movie_title');
+        $movie->year = $request->get('movie_year');
+        $movie->duration = $request->get('movie_duration');
+        $movie->genre = $request->get('movie_genre');
+        $movie->language = $request->get('movie_language');
+        $movie->plot = $request->get('movie_plot');
+        $movie->trailer > $request->get('movie_trailer');
+        $movie->photo = $fileNameToStore;
         $movie->save();
 
         return redirect('/movies')->with('success', 'Movie has been updated');

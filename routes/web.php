@@ -10,22 +10,29 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Movie;
 
 Route::get('/', function () {
     //$title = 'Welcome to Movie Paradise';
-    return view('welcome');
+    $movies = Movie::all();
+    return view('welcome',compact('movies'));
 });
 
-Route::get('/index', 'PagesController@index');
+Route::get('/index', 'PagesController@index')->middleware('user');
 
-Route::resource('movies','MoviesController');
-Route::resource('series','SeriesController');
-Route::resource('reviews','ReviewsController');
-Route::resource('stars','StarsController');
-Route::resource('directors','DirectorsController');
+Route::resource('movies','MoviesController')->middleware('user');
+Route::resource('series','SeriesController')->middleware('user');
+Route::resource('reviews','ReviewsController')->middleware('user');
+Route::resource('stars','StarsController')->middleware('user');
+Route::resource('directors','DirectorsController')->middleware('user');
 
 
 Auth::routes();
-
+Route::get('/home',function(){
+    return view('movieSingle');
+});
+Route::get('/about',function(){
+    return view('about');
+});
 Route::get('/dashboard', 'DashboardController@index');
 
