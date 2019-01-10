@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 <style>
@@ -13,6 +13,7 @@
     </div><br />
   @endif
   <h1>Actors</h1>
+  @if (!Auth::guest() && Auth::user()->hasRole('Admin'))
   <table class="table table-striped">
     <thead>
         <tr>
@@ -43,5 +44,32 @@
     </tbody>
   </table>
 <div>
+
+@else
+<div class="row">
+			@foreach($stars as $star)
+            <div class="col-lg-4 col-md-6 mb-4">
+				  <div class="card" style="width: 18rem;">
+				  <img class="card-img" src="/storage/app/public/photo/{{$star->photo}}">
+            		<div class="card-body">
+                        <h4 class="card-title">{{$star->name}}</h4>
+            		</div>
+            		<div class="card-footer">
+						  <a href="#" class="btn btn-primary" style="float: center;">Find Out More!</a>
+						  <!-- <a href="#"  id="mylink" onclick="myFunction()" class="btn btn-primary" style="float: right;">Save</a> -->
+						  <a href="#" class="btn btn-success btn-lg">
+     						 <span class="glyphicon glyphicon-heart"></span> Save 
+    					</a>
+            		</div>
+          		</div>
+			</div>
+			<script>
+				function myFunction() {
+ 				 document.getElementById("mylink").innerHTML = "Saved";
+				}
+			</script>
+			@endforeach
+          </div>
+          @endif
 <a href="/stars/create" class="btn btn-primary">Insert</a>
 @endsection

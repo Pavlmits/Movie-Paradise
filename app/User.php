@@ -17,7 +17,35 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Movie','user_movie','user_id','movie_id');
     }
-   
+
+    public function hasAnyRole($roles)
+    {
+        if(is_array($roles))
+        {
+            foreach($roles as $roles)
+            {
+                if($this->hasRole($role))
+                {
+                    return true;
+                }
+            }
+        }
+        else{
+            if($this->hasRole($roles))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+   public function hasRole($role)
+   {
+       if($this->roles()->where('name',$role)->first())
+       {
+           return true;
+       }
+       return false;
+   }
     
     use Notifiable;
 
@@ -39,8 +67,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function hasAnyRole($roles)
-    {
-        
-    }
 }

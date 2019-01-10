@@ -56,7 +56,7 @@ class MoviesController extends Controller
             // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('photo')->storeAs('public/photo', $fileNameToStore);
+            $path = $request->file('photo')->storeAs('public/photo/', $fileNameToStore);
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
@@ -84,6 +84,7 @@ class MoviesController extends Controller
      */
     public function show($id)
     {
+        
     }
     /**
      * Show the form for editing the specified resource.
@@ -119,7 +120,7 @@ class MoviesController extends Controller
             // Filename to store
             $fileNameToStore= $filename.'_'.time().'.'.$extension;
             // Upload Image
-            $path = $request->file('photo')->storeAs('public/photo', $fileNameToStore);
+            $path = $request->file('photo')->storeAs('public/photo/', $fileNameToStore);
         } else {
             $fileNameToStore = 'noimage.jpg';
         }
@@ -149,5 +150,12 @@ class MoviesController extends Controller
         $movie->delete();
 
         return redirect('/movies')->with('success', 'Movie has been deleted Successfully');
+    }
+
+    public function userShow()
+    {
+        $movies = Movie::all();
+        return view('movieSingle',compact('movies'));
+
     }
 }

@@ -15,11 +15,12 @@ class UserPages
      */
     public function handle($request, Closure $next)
     {
-        echo "check user";
-        if($request->role != 'Admin')
-        {   
-            return redirect('/');
+        if($request->user() === null or $request->user()->roles() == 'User')
+        {
+            return redirect('/movies/shows');
         }
+    
+       
         return $next($request);
     }
 }

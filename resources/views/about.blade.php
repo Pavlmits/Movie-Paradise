@@ -23,7 +23,7 @@
       <td>Pavlina</td>
       <td>Mitsou</td>
       <td>@pavlmits</td>
-      <td>pavlinamitsou@gmail.com</tb>
+      <td>pavlinamitsou@gmail.com</td>
     </tr>
   </tbody>
 </table>

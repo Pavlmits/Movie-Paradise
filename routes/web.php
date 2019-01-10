@@ -18,18 +18,18 @@ Route::get('/', function () {
     return view('welcome',compact('movies'));
 });
 
-Route::get('/index', 'PagesController@index')->middleware('user');
+Route::get('/index', 'PagesController@index');
 
-Route::resource('movies','MoviesController')->middleware('user');
-Route::resource('series','SeriesController')->middleware('user');
-Route::resource('reviews','ReviewsController')->middleware('user');
-Route::resource('stars','StarsController')->middleware('user');
-Route::resource('directors','DirectorsController')->middleware('user');
+Route::resource('movies','MoviesController');
+Route::resource('stars','StarsController');
+Route::resource('directors','DirectorsController');
 
 
 Auth::routes();
-Route::get('/home',function(){
-    return view('movieSingle');
+Route::get('/movies/shows',function(){
+    $movies = Movie::all();
+    return view('movieSingle',compact('movies'));
+
 });
 Route::get('/about',function(){
     return view('about');
