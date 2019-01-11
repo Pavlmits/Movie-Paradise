@@ -1,7 +1,8 @@
-  <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:powderblue;">
+  <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:black;">
+  
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                   <b> Movie Paradise</b>
+                   <b style="color:blue;"> Movie Paradise</b>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -15,16 +16,16 @@
 
                <ul class="navbar-nav mr-auto">
                   <li class="dropdown">
-                    <a class="nav-link" href="/movies">Movies</a>
+                    <a style="color:blue;" class="nav-link"  href="/movies">Movies</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/stars">Actors</a>
+                    <a style="color:blue;" class="nav-link" href="/stars">Actors</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/directors">Directors</a>
+                    <a style="color:blue;" class="nav-link" href="/directors">Directors</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
+                    <a style="color:blue;" class="nav-link" href="/about">About</a>
                   </li>
                 </ul>
 
@@ -32,8 +33,8 @@
                     <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
+                    <li><a class="nav-link" style="color:#00FFFF;" href="{{ route('login') }}">Login</a></li>
+                    <li><a class="nav-link" style="color:#00FFFF;" href="{{ route('register') }}">Register</a></li>
                 @else
                 <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -33,4 +33,32 @@ class Movie extends Model
     {
         return $this->belongsToMany('App\Genre','movie_genre','movie_id','genre_id');
     }
+    public function hasAnyUser($users)
+    {
+        if(is_array($users))
+        {
+            foreach($users as $users)
+            {
+                if($this->hasUser($user))
+                {
+                    return true;
+                }
+            }
+        }
+        else{
+            if($this->hasUser($users))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+   public function hasUser($user)
+   {
+       if($this->users()->where('name',$user)->first())
+       {
+           return true;
+       }
+       return false;
+   }
 }

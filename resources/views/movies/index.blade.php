@@ -47,21 +47,27 @@
 <div>
 <a href="/movies/create" class="btn btn-primary">Insert</a>
 @else
-<div class="row">
+<div class="container">
+    <div class="row justify-content-center">
 			@foreach($movies as $movie)
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-md-4">
 				  <div class="card" style="width: 18rem;">
-				  <img class="card-img" src="/storage/app/public/photo/{{$movie->photo}}">
-            		<!-- <div style="width:300; height:200px; background:url('{{$movie->photo}}');" ><img class="card-img-top" alt=""></div> -->
+				  <img class="card-img-top" src="/storage/app/public/photo/{{$movie->photo}}" alt="Card image cap">
             		<div class="card-body">
-                        <h4 class="card-title">{{$movie->name}}</h4>
+                    <h4 class="card-title">{{$movie->name}}</h4>
               			<p class="card-text">{{ $movie->year }} </p>
-            		</div>
+                </div>
             		<div class="card-footer">
-						  <a href="#" class="btn btn-primary" style="float: center;">Find Out More!</a>
-						  <!-- <a href="#"  id="mylink" onclick="myFunction()" class="btn btn-primary" style="float: right;">Save</a> -->
-						  <a href="#" class="btn btn-success btn-lg">
-     						 <span class="glyphicon glyphicon-heart"></span> Save 
+                  <a href="#" class="btn btn-primary" style="float: center;">Find Out More!</a>
+                  @if (!Auth::guest() && Auth::user()->hasRole('User'))
+                   @if($movie->hasUser(Auth::user()))
+                     <a href="/savemovie/{{Auth::user()->getId()}}/{{$movie->id}}" class="btn btn-success btn-lg">
+                     <span class="glyphicon glyphicon-heart"> Unsave </span>
+                   @else
+						       <a href="/savemovie/{{Auth::user()->getId()}}/{{$movie->id}}" class="btn btn-success btn-lg">
+                  <span class="glyphicon glyphicon-heart"> Save </span>
+                  @endif
+                  @endif
     					</a>
             		</div>
           		</div>

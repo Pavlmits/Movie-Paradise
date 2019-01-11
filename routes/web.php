@@ -11,6 +11,7 @@
 |
 */
 use App\Movie;
+use App\User;
 
 Route::get('/', function () {
     //$title = 'Welcome to Movie Paradise';
@@ -35,4 +36,10 @@ Route::get('/about',function(){
     return view('about');
 });
 Route::get('/dashboard', 'DashboardController@index');
+Route::get('/savemovie/{idUser}/{idMovie}',function ($idUser,$idMovie){
+    $user = User::find($idUser);
+    $movie = Movie::find($idMovie);
+    $movie->users()->attach($user);
+    return redirect('/movies');
+});
 

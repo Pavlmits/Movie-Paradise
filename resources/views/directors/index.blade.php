@@ -44,6 +44,7 @@
     </tbody>
   </table>
 <div>
+<a href="/directors/create" class="btn btn-primary">Insert</a>
 @else
 <div class="row">
 			@foreach($directors as $director)
@@ -55,10 +56,6 @@
             		</div>
             		<div class="card-footer">
 						  <a href="#" class="btn btn-primary" style="float: center;">Find Out More!</a>
-						  <!-- <a href="#"  id="mylink" onclick="myFunction()" class="btn btn-primary" style="float: right;">Save</a> -->
-						  <a href="#" class="btn btn-success btn-lg">
-     						 <span class="glyphicon glyphicon-heart"></span> Save 
-    					</a>
             		</div>
           		</div>
 			</div>
@@ -70,5 +67,5 @@
 			@endforeach
           </div>
           @endif
-<a href="/directors/create" class="btn btn-primary">Insert</a>
+
 @endsection

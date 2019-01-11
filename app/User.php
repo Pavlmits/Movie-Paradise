@@ -17,6 +17,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Movie','user_movie','user_id','movie_id');
     }
+    public function getId()
+    {
+        return $this->id;
+    }
 
     public function hasAnyRole($roles)
     {
