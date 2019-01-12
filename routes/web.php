@@ -42,4 +42,14 @@ Route::get('/savemovie/{idUser}/{idMovie}',function ($idUser,$idMovie){
     $movie->users()->attach($user);
     return redirect('/movies');
 });
+Route::get('/deletemovie/{idUser}/{idMovie}',function ($idUser,$idMovie){
+    $movie = Movie::find($idMovie);
+    $movie->users()->detach($idUser);
+    return redirect('/movies');
+});
+Route::get('/mymovies/{user}',function($userId){
+    
+    $movies = Movie::where('id', '=', $userId);
+    return view('myMovies',compact('movies'));
+});
 

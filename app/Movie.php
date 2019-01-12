@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
@@ -60,5 +60,14 @@ class Movie extends Model
            return true;
        }
        return false;
+   }
+   public function saveUser($user)
+   {
+    return ! is_null(
+        DB::table('user_movie')
+          ->where('user_id', $user->id)
+          ->where('movie_id', $this->id)
+          ->first()
+    );
    }
 }

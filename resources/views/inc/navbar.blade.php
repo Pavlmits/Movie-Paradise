@@ -1,47 +1,41 @@
-  <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color:black;">
+  <nav class="nav-wrapper" style="background-color:#EF6E73;">
   
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                   <b style="color:blue;"> Movie Paradise</b>
+                <a class="center brand-logo" href="{{ url('/') }}">
+                   <b class="white-text"> Movie Paradise</b>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-               <ul class="navbar-nav mr-auto">
-                  <li class="dropdown">
-                    <a style="color:blue;" class="nav-link"  href="/movies">Movies</a>
+               <ul id="nav-mobile" class="left hide-on-med-and-down">
+                  <li>
+                    <a class="white-text" class="nav-link"  href="/movies">Movies</a>
                   </li>
-                  <li class="nav-item">
-                    <a style="color:blue;" class="nav-link" href="/stars">Actors</a>
+                  <li>
+                    <a class="white-text" class="nav-link" href="/stars">Actors</a>
                   </li>
-                  <li class="nav-item">
-                    <a style="color:blue;" class="nav-link" href="/directors">Directors</a>
+                  <li>
+                    <a class="white-text" class="nav-link" href="/directors">Directors</a>
                   </li>
-                  <li class="nav-item">
-                    <a style="color:blue;" class="nav-link" href="/about">About</a>
+                  <li>
+                    <a class="white-text" class="nav-link" href="/about">About</a>
+                  </li>
+                  <li>
+                    <a class="white-text" class="nav-link" href="/game">Game</a>
                   </li>
                 </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a class="nav-link" style="color:#00FFFF;" href="{{ route('login') }}">Login</a></li>
-                    <li><a class="nav-link" style="color:#00FFFF;" href="{{ route('register') }}">Register</a></li>
+                    <li><a  style="color:#00FFFF;" href="{{ route('login') }}">Login</a></li>
+                    <li><a style="color:#00FFFF;" href="{{ route('register') }}">Register</a></li>
                 @else
-                <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                     <li class="dropdown">
+                                <a href="#" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
-                                <ul class="dropdown-menu" role="menu">
+                                <ul class="dropdown-trigger" role="menu">
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -52,6 +46,9 @@
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                    </li>
+                                    <li>
+                                        <a href="/mymovies/{{Auth::user()->id}}">My movies</a>
                                     </li>
                                 </ul>
                             </li>

@@ -48,24 +48,22 @@
 <a href="/movies/create" class="btn btn-primary">Insert</a>
 @else
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
 			@foreach($movies as $movie)
-            <div class="col-md-4">
-				  <div class="card" style="width: 18rem;">
-				  <img class="card-img-top" src="/storage/app/public/photo/{{$movie->photo}}" alt="Card image cap">
-            		<div class="card-body">
-                    <h4 class="card-title">{{$movie->name}}</h4>
-              			<p class="card-text">{{ $movie->year }} </p>
+        <div class="col s12 m6">
+          <div class="card" >
+          <div class="card-image">
+				    <img  src="{{ URL::asset('storage/app/photo'.$movie->photo) }}" alt="Card image cap">
+                    <span class="card-title">{{$movie->name}}</span>
+              			<p class="card-content">{{ $movie->plot }} </p>
                 </div>
             		<div class="card-footer">
                   <a href="#" class="btn btn-primary" style="float: center;">Find Out More!</a>
                   @if (!Auth::guest() && Auth::user()->hasRole('User'))
-                   @if($movie->hasUser(Auth::user()))
-                     <a href="/savemovie/{{Auth::user()->getId()}}/{{$movie->id}}" class="btn btn-success btn-lg">
-                     <span class="glyphicon glyphicon-heart"> Unsave </span>
+                   @if($movie->saveUser(Auth::user()))
+                   <a  href="/deletemovie/{{Auth::user()->getId()}}/{{$movie->id}}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">&#128148</i></a>
                    @else
-						       <a href="/savemovie/{{Auth::user()->getId()}}/{{$movie->id}}" class="btn btn-success btn-lg">
-                  <span class="glyphicon glyphicon-heart"> Save </span>
+                   <a  href="/savemovie/{{Auth::user()->getId()}}/{{$movie->id}}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">♥</i></a>
                   @endif
                   @endif
     					</a>
