@@ -53,7 +53,7 @@
         <div class="col s12 m6">
           <div class="card" >
           <div class="card-image">
-				    <img  src="{{ URL::asset('storage/app/photo'.$movie->photo) }}" alt="Card image cap">
+				    <img  src="{{$movie->photo }}" alt="Card image cap">
                     <span class="card-title">{{$movie->name}}</span>
               			<p class="card-content">{{ $movie->plot }} </p>
                 </div>

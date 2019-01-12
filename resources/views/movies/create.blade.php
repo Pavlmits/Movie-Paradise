@@ -57,7 +57,7 @@
           </div>
           <div class="form-group" >
             <label for="photo">Photo :</label>
-                {{Form::file('photo')}}
+            <input type="text" class="form-control" name="movie_photo" value="{{ old('movie_photo') }}"/>
           </div>
           <button type="submit" class="btn btn-primary">Add</button>
       </form>

@@ -39,29 +39,14 @@ class StarsController extends Controller
         $this -> validate($request,[
             'name' => 'required',
             'bio'=>'required',
-            'photo'=>'image|nullable|max:1999'
+            'photo'=>'required'
         ]);
 
-        if($request->hasFile('photo')){
-            // Get filename with the extension
-            $filenameWithExt = $request->file('photo')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('photo')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('photo')->storeAs('public/photo', $fileNameToStore);
-        } else {
-            $fileNameToStore = 'noimage.jpg';
-        }
 
         $star = new Star;
         $star->name = $request->input('name');
         $star->bio = $request->input('bio');
-        $star->photo = $fileNameToStore;
-        
+        $star->photo =$request->input('photo');
         $star->save();
         
         return redirect('/stars')->with('success', 'Actor has been added');
@@ -103,12 +88,15 @@ class StarsController extends Controller
     {
         $this -> validate($request,[
             'name' => 'required',
-            'bio'=>'required'
+            'bio'=>'required',
+            'photo'=>'required'
         ]);
 
         $star = Star::find($id);
         $star->name = $request->input('name');
         $star->bio = $request->input('bio');
+        $star->bio = $request->input('photo');
+
         $star->save();
         
         return redirect('/stars')->with('success', 'Actor has been updated');

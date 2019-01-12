@@ -43,24 +43,9 @@ class MoviesController extends Controller
         $request->validate([
             'movie_title'=>'required',
             'movie_year'=>'required|integer',
-            'movie_duration'=>'required|integer',
-            'photo'=>'image|nullable|max:1999'
+            'movie_duration'=>'required|integer'
+            
         ]) ;
-
-        if($request->hasFile('photo')){
-            // Get filename with the extension
-            $filenameWithExt = $request->file('photo')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('photo')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('photo')->storeAs('public/photo/', $fileNameToStore);
-        } else {
-            $fileNameToStore = 'noimage.jpg';
-        }
 
         $movie = new Movie ([
             'title' => $request->get('movie_title'),
@@ -71,7 +56,7 @@ class MoviesController extends Controller
             'plot' => $request->get('movie_plot'),
             'trailer' => $request->get('movie_trailer')
         ]);
-        $movie->photo = $fileNameToStore;
+        $movie->photo = $request->get('movie_photo');
             $movie->save();
 
             return redirect('/movies')->with('success', 'Movie has been added');
@@ -110,21 +95,6 @@ class MoviesController extends Controller
     public function update(Request $request, $id)
     {
         
-
-        if($request->hasFile('photo')){
-            // Get filename with the extension
-            $filenameWithExt = $request->file('photo')->getClientOriginalName();
-            // Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('photo')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore= $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('photo')->storeAs('public/photo/', $fileNameToStore);
-        } else {
-            $fileNameToStore = 'noimage.jpg';
-        }
         $movie = Movie::find($id);
         $movie->title = $request->get('movie_title');
         $movie->year = $request->get('movie_year');
@@ -133,7 +103,7 @@ class MoviesController extends Controller
         $movie->language = $request->get('movie_language');
         $movie->plot = $request->get('movie_plot');
         $movie->trailer > $request->get('movie_trailer');
-        $movie->photo = $fileNameToStore;
+        $movie->photo = $request->get('movie_photo');
         $movie->save();
 
         return redirect('/movies')->with('success', 'Movie has been updated');

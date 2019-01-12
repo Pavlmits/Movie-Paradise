@@ -33,8 +33,8 @@
           </div>
           
           <div class="form-group" >
-            <label for="photo">Photo :</label>
-                {{Form::file('photo')}}
+          <label for="name">Photo:</label>
+              <input type="text" class="form-control" name= "photo" value="{{ old('photo') }}"/>
           </div>
           <button type="submit" class="btn btn-primary">Add</button>
       </form>

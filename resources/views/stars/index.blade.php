@@ -50,7 +50,7 @@
 			@foreach($stars as $star)
             <div class="col-lg-4 col-md-6 mb-4">
 				  <div class="card" style="width: 18rem;">
-				  <img class="card-img" src="/storage/app/public/photo/{{$star->photo}}">
+				  <img class="card-img" src="{{$star->photo}}">
             		<div class="card-body">
                         <h4 class="card-title">{{$star->name}}</h4>
             		</div>

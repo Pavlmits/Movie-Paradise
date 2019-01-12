@@ -18,9 +18,6 @@
                   <li>
                     <a class="white-text" class="nav-link" href="/about">About</a>
                   </li>
-                  <li>
-                    <a class="white-text" class="nav-link" href="/game">Game</a>
-                  </li>
                 </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -50,8 +50,8 @@
             {{Form::text('trailer',$movie->trailer,['class'=>'form-control','placeholder'=>'Trailer'])}}
           </div>
           <div class="form-group" >
-            <label for="photo">Photo :</label>
-                {{Form::file('photo')}}
+            {{Form::label('photo','Photo')}}
+            {{Form::text('photo',$movie->photo,['class'=>'form-control','placeholder'=>'Photo'])}}
           </div>
           {{Form::submit('Submit',['class'=>'btn btn-primary'])}}
       {!! Form::close() !!}
