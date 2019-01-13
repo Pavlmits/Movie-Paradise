@@ -2,7 +2,7 @@
 
 @section('content')
   <h1>Edit Director</h1>
-    {!! Form::open(['action' => ['DirectorsController@update',$director->id],'method'=>'Post'])!!}
+    {!! Form::open(['action' => ['DirectorsController@update',$director->id],'method'=>'PUT', 'enctype' => 'multipart/form-data'])!!}
       <div class="form-group">
             {{Form::label('name','Name')}}
             {{Form::text('name',$director->name,['class'=>'form-control','placeholder'=>'Name'])}}

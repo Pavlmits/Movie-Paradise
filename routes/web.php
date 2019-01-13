@@ -47,9 +47,10 @@ Route::get('/deletemovie/{idUser}/{idMovie}',function ($idUser,$idMovie){
     $movie->users()->detach($idUser);
     return redirect('/movies');
 });
-Route::get('/mymovies/{user}',function($userId){
+Route::get('/mymovies/{userId}',function($userId){
     
-    $movies = Movie::where('id', '=', $userId);
+    $user = User::find($userId);
+    $movies = $user->movies()->get();
     return view('myMovies',compact('movies'));
 });
 

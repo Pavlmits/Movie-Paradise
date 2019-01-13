@@ -2,7 +2,7 @@
 
 @section('content')
   <h1>Edit Actor</h1>
-    {!! Form::open(['action' => ['StarsController@update',$director->id],'method'=>'Post'])!!}
+    {!! Form::open(['action' => ['StarsController@update',$star->id],'method'=>'PUT', 'enctype' => 'multipart/form-data'])!!}
       <div class="form-group">
             {{Form::label('name','Name')}}
             {{Form::text('name',$star->name,['class'=>'form-control','placeholder'=>'Name'])}}

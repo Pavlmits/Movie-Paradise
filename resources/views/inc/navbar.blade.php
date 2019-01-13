@@ -1,11 +1,11 @@
   <nav class="nav-wrapper" style="background-color:#EF6E73;">
   
             <div class="container">
-                <a class="center brand-logo" href="{{ url('/') }}">
+                <a class=" brand-logo" href="{{ url('/') }}">
                    <b class="white-text"> Movie Paradise</b>
                 </a>
 
-               <ul id="nav-mobile" class="left hide-on-med-and-down">
+               <ul id="nav-mobile" class="right hide-on-med-and-down">
                   <li>
                     <a class="white-text" class="nav-link"  href="/movies">Movies</a>
                   </li>
@@ -16,8 +16,6 @@
                     <a class="white-text" class="nav-link" href="/directors">Directors</a>
                   </li>
                   <li>
-                    <a class="white-text" class="nav-link" href="/about">About</a>
-                  </li>
                 </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -36,7 +34,7 @@
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                     document.getElementById('logout-form').submit();" color="black">
                                             Logout
                                         </a>
 
@@ -45,7 +43,7 @@
                                         </form>
                                     </li>
                                     <li>
-                                        <a href="/mymovies/{{Auth::user()->id}}">My movies</a>
+                                        <a href="/mymovies/{{Auth::user()->id}}" color="black">>My movies</a>
                                     </li>
                                 </ul>
                             </li>

@@ -96,15 +96,15 @@ class MoviesController extends Controller
     {
         
         $movie = Movie::find($id);
-        $movie->title = $request->get('movie_title');
-        $movie->year = $request->get('movie_year');
-        $movie->duration = $request->get('movie_duration');
-        $movie->genre = $request->get('movie_genre');
-        $movie->language = $request->get('movie_language');
-        $movie->plot = $request->get('movie_plot');
-        $movie->trailer > $request->get('movie_trailer');
-        $movie->photo = $request->get('movie_photo');
+        $movie->title = $request->input('title');
+        $movie->year = $request->input('year');
+        $movie->duration = $request->input('duration');
+        $movie->language = $request->input('language');
+        $movie->plot = $request->input('plot');
+        $movie->trailer > $request->input('trailer');
+        $movie->photo = $request->input('photo');
         $movie->save();
+        $movie->genres()->attach($request->get('genre'));
 
         return redirect('/movies')->with('success', 'Movie has been updated');
     }

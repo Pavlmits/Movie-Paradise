@@ -1,13 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-
-@foreach($movies as $movie)
-<ul class="collection with-header">
-    <li class="collection-header"><h4>Favourite Movies</h4></li>
-    <li class="collection-item"><div>{{$movie->name}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-</ul>
-@endforeach
-
+<table class="table table-striped">
+    <thead>
+        <tr>
+          <td>Movie</td>
+          <td colspan="2">Action</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($movies as $movie)
+        <tr>
+            <td>{{$movie->title}}</td>
+            <td><a href="/deletemovie/{{Auth::user()->getId()}}/{{$movie->id}}" class="btn btn-primary">Unlike</a></td>
+        </tr>
+        @endforeach
+    </tbody>
+  </table>
+<div>
 
 @endsection

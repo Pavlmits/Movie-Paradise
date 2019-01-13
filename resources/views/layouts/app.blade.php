@@ -12,11 +12,13 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		 <!-- Latest compiled and minified CSS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 

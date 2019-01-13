@@ -54,7 +54,6 @@
           <div class="card" >
           <div class="card-image">
 				    <img  src="{{$movie->photo }}" alt="Card image cap">
-                    <span class="card-title">{{$movie->name}}</span>
               			<p class="card-content">{{ $movie->plot }} </p>
                 </div>
             		<div class="card-footer">
